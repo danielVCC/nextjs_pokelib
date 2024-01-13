@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react"
 import Image from "next/image";
 
@@ -11,6 +13,8 @@ interface PokeCardProps {
 const PokeCard = ( { pokemon } : PokeCardProps) => {
 
     const { form, pokemon_id, pokemon_name, type } = pokemon
+
+    const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="poke-card group">
@@ -32,14 +36,36 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
             </a>
         </div>
 
-        <div className="relative flex 2-full mt-2">
+        <div className="relative flex w-full mt-2">
             <div className="poke-card__icon-container">
                 <div className="poke-card__icon">
                     <Image src="/star.svg" width={20} height={20} alt="rarity" />
-                    <p className="text-[14px]">
+                    <p className="poke-card__icon-text">
                         {form}
                     </p>
                 </div>
+                <div className="flex flex-col justify-center items-center gap-2">
+                    <Image src="/star.svg" width={20} height={20} alt="rarity" />
+                    <p className="poke-card__icon-text">
+                        {form}
+                    </p>
+                </div>
+                <div className="poke-card__icon">
+                    <Image src="/star.svg" width={20} height={20} alt="rarity" />
+                    <p className="poke-card__icon-text">
+                        {form}
+                    </p>
+                </div>               
+            </div>
+
+            <div className="poke-card__btn-container">
+                <CustomButton 
+                    title="More Details"
+                    containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+                    textStyles="text-white text-[14px] leading-[17px] font-bold"
+                    rightIcon="right-arrow.svg"
+                    handleClick={() => setIsOpen(true)}
+                />
             </div>
 
         </div>
