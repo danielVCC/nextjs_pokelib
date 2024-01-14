@@ -15,16 +15,21 @@ export interface SearchTypeProps {
     setType: (type: string) => void;
 }
 
-export interface PokemonTypeProps {
+export interface PokemonBaseProps {
     form?: string;
     pokemon_id: number;
     pokemon_name: string;
+}
+
+export interface PokemonStatsProps extends PokemonBaseProps {
+    base_attack: number;
+    base_defense: number;
+    base_stamina: number;
+}
+
+export interface PokemonTypeProps extends PokemonBaseProps {
     type: string[];
 }
 
-export interface PokemonProps {
-    form?: string;
-    pokemon_id: number;
-    pokemon_name: string;
-    type: string[];
+export interface PokemonProps extends PokemonTypeProps, PokemonStatsProps {
 }

@@ -12,7 +12,7 @@ interface PokeCardProps {
 
 const PokeCard = ( { pokemon } : PokeCardProps) => {
 
-    const { form, pokemon_id, pokemon_name, type } = pokemon
+    const { form, pokemon_id, pokemon_name, type, base_attack, base_defense, base_stamina } = pokemon
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -39,21 +39,21 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
         <div className="relative flex w-full mt-2">
             <div className="poke-card__icon-container">
                 <div className="poke-card__icon">
-                    <Image src="/star.svg" width={20} height={20} alt="rarity" />
+                    <Image src="/attack.svg" width={20} height={20} alt="rarity" />
                     <p className="poke-card__icon-text">
-                        {form}
+                        {base_attack}
                     </p>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
-                    <Image src="/star.svg" width={20} height={20} alt="rarity" />
+                    <Image src="/defense.svg" width={20} height={20} alt="rarity" />
                     <p className="poke-card__icon-text">
-                        {form}
+                        {base_defense}
                     </p>
                 </div>
                 <div className="poke-card__icon">
-                    <Image src="/star.svg" width={20} height={20} alt="rarity" />
+                    <Image src="/heart.svg" width={20} height={20} alt="rarity" />
                     <p className="poke-card__icon-text">
-                        {form}
+                        {base_stamina}
                     </p>
                 </div>               
             </div>

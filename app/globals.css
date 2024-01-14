@@ -116,15 +116,15 @@
 }
 
 .poke-card__icon-container {
-  @apply flex group-hover:invisible w-full justify-between text-grey;
+  @apply flex group-hover:invisible w-full justify-between;
 }
 
 .poke-card__icon {
-  @apply flex flex-col justify-center items-center gap-2;
+  @apply flex flex-col justify-center items-center gap-2 px-4;
 }
 
 .poke-card__icon-text {
-  @apply text-[14px] leading-[17px];
+  @apply text-[14px] leading-[17px] font-bold;
 }
 
 .poke-card__btn-container {
