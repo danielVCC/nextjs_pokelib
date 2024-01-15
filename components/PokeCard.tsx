@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image";
 
 import { PokemonProps } from "@/types"
-import { CustomButton } from ".";
+import { CustomButton, PokemonDetails } from ".";
 
 interface PokeCardProps {
     pokemon: PokemonProps;
@@ -39,20 +39,20 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
         <div className="relative flex w-full mt-2">
             <div className="poke-card__icon-container">
                 <div className="poke-card__icon">
-                    <Image src="/attack.svg" width={20} height={20} alt="rarity" />
-                    <p className="poke-card__icon-text">
+                    <Image src="/attack.svg" width={30} height={30} alt="rarity" />
+                    <p className="poke-card__icon-text text-yellow-600">
                         {base_attack}
                     </p>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
-                    <Image src="/defense.svg" width={20} height={20} alt="rarity" />
-                    <p className="poke-card__icon-text">
+                    <Image src="/defense.svg" width={28} height={28} alt="rarity" />
+                    <p className="poke-card__icon-text text-blue-700">
                         {base_defense}
                     </p>
                 </div>
                 <div className="poke-card__icon">
-                    <Image src="/heart.svg" width={20} height={20} alt="rarity" />
-                    <p className="poke-card__icon-text">
+                    <Image src="/heart.svg" width={27} height={27} alt="rarity" />
+                    <p className="poke-card__icon-text text-red-700">
                         {base_stamina}
                     </p>
                 </div>               
@@ -67,8 +67,9 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
                     handleClick={() => setIsOpen(true)}
                 />
             </div>
-
         </div>
+
+        <PokemonDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} pokemon={pokemon}/>
 
     </div>
   )

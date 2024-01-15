@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import CustomFilter from "./CustomFilter";
 import SearchType from "./SearchType";
 import PokeCard from "./PokeCard";
+import PokemonDetails from "./PokemonDetails";
 
 export {
     Hero,
@@ -17,5 +18,6 @@ export {
     SearchBar,
     CustomFilter,
     SearchType,
-    PokeCard
+    PokeCard,
+    PokemonDetails
 }
