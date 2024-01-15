@@ -1,8 +1,8 @@
 "use client";
 
-import { Combobox, Transition } from '@headlessui/react'
+import { Combobox, Transition } from '@headlessui/react';
 
-import { SearchTypeProps } from '@/types'
+import { SearchTypeProps } from '@/types';
 
 import { pokemonTypes } from '@/constants';
 

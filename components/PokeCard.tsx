@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import Image from "next/image";
 
-import { PokemonProps } from "@/types"
+import { PokemonProps } from "@/types";
 import { CustomButton, PokemonDetails } from ".";
 
 interface PokeCardProps {
@@ -12,9 +12,10 @@ interface PokeCardProps {
 
 const PokeCard = ( { pokemon } : PokeCardProps) => {
 
-    const { form, pokemon_id, pokemon_name, type, base_attack, base_defense, base_stamina } = pokemon
+    const { form, pokemon_id, pokemon_name, type, base_attack, base_defense, base_stamina } = pokemon;
 
     const [isOpen, setIsOpen] = useState(false);
+    // const [imageError, setImageError] = useState(false)
 
   return (
     <div className="poke-card group">
@@ -31,8 +32,9 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
         </p>
 
         <div className="poke-card__image">
-            <a href="https://pokemondb.net/pokedex/pikachu">
-                <Image src="https://img.pokemondb.net/sprites/x-y/normal/pikachu-f.png" alt="Pikachu" fill priority className="object-contain" />
+            <a href={`https://pokemondb.net/pokedex/${pokemon_name.toLowerCase()}`}>
+                <Image src={`https://img.pokemondb.net/sprites/x-y/normal/${pokemon_name.toLowerCase()}.png`}
+                    alt={pokemon_name} fill priority className="object-contain" />
             </a>
         </div>
 

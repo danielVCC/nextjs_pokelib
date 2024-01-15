@@ -56,13 +56,14 @@ const PokemonDetails = ({ isOpen, closeModal, pokemon }: PokemonDetailsProps) =>
 
                 <div className='flex-1 flex flex-col gap-3'>
                   <div className='relative w-full h-60 bg-pattern bg-cover bg-center rounded-lg'>
-                    <Image src="https://img.pokemondb.net/sprites/x-y/normal/pikachu-f.png" alt="Pikachu" fill priority className="object-contain" />
+                    <Image src={`https://img.pokemondb.net/sprites/x-y/normal/${pokemon.pokemon_name.toLowerCase()}.png`}
+                        alt={pokemon.pokemon_name} fill priority className="object-contain" />
                   </div>
                 </div>
 
                 <div className='flex-1 flex flex-col gap-2'>
                   <h2 className='font-semibold text-xl capitalize'>
-                    {"car.make"} {"car.model"}
+                    {pokemon.pokemon_name} {"#" + pokemon.pokemon_id}
                   </h2>
 
                   <div className='mt-3 flex flex-wrap gap-4'>

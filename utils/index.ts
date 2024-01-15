@@ -15,7 +15,7 @@ export async function fetchPokemonByType(type: string): Promise<PokemonProps[]> 
         const pokemonDataList: PokemonTypeProps[] = JSON.parse(await response.text());
 
         const filteredPokemon = pokemonDataList.filter((pokemon) => {
-            return pokemon.type.includes(type) && pokemon.pokemon_id <=62 && pokemon.form==='Normal';
+            return pokemon.type.includes(type) && pokemon.pokemon_id <=151 && pokemon.form==='Normal';
         });
 
         const pokemonPromises = filteredPokemon.map(async (pokemon) => {
