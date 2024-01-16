@@ -1,4 +1,4 @@
-import { PokemonProps, PokemonStatsProps, PokemonTypeProps } from "@/types";
+import { PokemonProps, PokemonStatsProps, PokemonTypeProps, filterProps } from "@/types";
 require('dotenv').config();
 
 const API_URL = 'https://pokemon-go1.p.rapidapi.com/pokemon_types.json';
@@ -9,14 +9,24 @@ const API_HEADERS = {
     'X-RapidAPI-Host': 'pokemon-go1.p.rapidapi.com',
 };
 
-export async function fetchPokemonByType(type: string): Promise<PokemonProps[]> {
+export async function fetchPokemonByType(filters : filterProps): Promise<PokemonProps[]> {
     try {
         const response = await fetch(API_URL, { method: 'GET', headers: API_HEADERS });
         const pokemonDataList: PokemonTypeProps[] = JSON.parse(await response.text());
 
-        const filteredPokemon = pokemonDataList.filter((pokemon) => {
-            return pokemon.type.includes(type) && pokemon.pokemon_id <=151 && pokemon.form==='Normal';
-        });
+        let filteredPokemon = pokemonDataList;
+        if (filters.type !== "") {
+            filteredPokemon = filteredPokemon.filter((pokemon) => {
+                return pokemon.type.map(type => type.toLowerCase()).includes(filters.type) 
+                && pokemon.pokemon_id <= 151 
+                && pokemon.form === 'Normal';
+            });
+        }
+        if (filters.name !== "") {
+            filteredPokemon = filteredPokemon.filter((pokemon) => {
+                return pokemon.pokemon_name.toLowerCase() === filters.name;
+            });
+        }
 
         const pokemonPromises = filteredPokemon.map(async (pokemon) => {
             const [ base_attack, base_defense, base_stamina ] = await fetchPokemonStats(pokemon.pokemon_id);

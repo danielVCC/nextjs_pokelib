@@ -15,6 +15,11 @@ export interface SearchTypeProps {
     setType: (type: string) => void;
 }
 
+export interface filterProps {
+    type: string;
+    name: string;
+}
+
 export interface PokemonBaseProps {
     form?: string;
     pokemon_id: number;

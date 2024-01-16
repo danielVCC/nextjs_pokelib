@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { Hero, SearchBar, CustomFilter, PokeCard } from '@/components'
 import { fetchPokemonByType } from '@/utils'
 
-export default async function Home() {
-  const waterTypes = await fetchPokemonByType("Water");
+export default async function Home({ searchParams }) {
 
-  // console.log(waterTypes);
+  const pokemons = await fetchPokemonByType({
+    type: searchParams.type || '',
+    name: searchParams.name || ''
+  });
   
-  const isDataEmpty = !Array.isArray(waterTypes) || waterTypes.length < 1 || !waterTypes;
+  const isDataEmpty = !Array.isArray(pokemons) || pokemons.length < 1 || !pokemons;
 
   return (
     <main className='overflow-hidden'>
@@ -32,7 +34,7 @@ export default async function Home() {
         {!isDataEmpty ? (
         <section>
             <div className="home__pokemons-wrapper">
-              {waterTypes?.map((pokemon) => (
+              {pokemons?.map((pokemon) => (
                 <PokeCard pokemon={pokemon} />
               ))}
             </div>
@@ -43,7 +45,7 @@ export default async function Home() {
             <h2 className="text-black text-xl font-bold">
               No Results
             </h2>
-          {/* <p>{waterTypes?.message}</p> */}
+          {/* <p>{pokemons?.message}</p> */}
           </div>
         )}
 
