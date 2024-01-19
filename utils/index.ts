@@ -9,17 +9,17 @@ const API_HEADERS = {
     'X-RapidAPI-Host': 'pokemon-go1.p.rapidapi.com',
 };
 
-export async function fetchPokemonByType(filters : filterProps): Promise<PokemonProps[]> {
+export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[]> {
     try {
         const response = await fetch(API_URL, { method: 'GET', headers: API_HEADERS });
         const pokemonDataList: PokemonTypeProps[] = JSON.parse(await response.text());
 
-        let filteredPokemon = pokemonDataList;
+        let filteredPokemon = pokemonDataList.filter((pokemon) => {
+            return pokemon.pokemon_id <= 151 && pokemon.form === 'Normal';
+        });
         if (filters.type !== "") {
             filteredPokemon = filteredPokemon.filter((pokemon) => {
                 return pokemon.type.map(type => type.toLowerCase()).includes(filters.type) 
-                && pokemon.pokemon_id <= 151 
-                && pokemon.form === 'Normal';
             });
         }
         if (filters.name !== "") {

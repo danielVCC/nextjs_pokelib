@@ -1,11 +1,11 @@
 import Image from 'next/image'
 
 import { Hero, SearchBar, CustomFilter, PokeCard } from '@/components'
-import { fetchPokemonByType } from '@/utils'
+import { fetchPokemon } from '@/utils'
 
 export default async function Home({ searchParams }) {
 
-  const pokemons = await fetchPokemonByType({
+  const pokemons = await fetchPokemon({
     type: searchParams.type || '',
     name: searchParams.name || ''
   });

@@ -35,7 +35,7 @@ query === ""
 
                 <Combobox.Input 
                     className="search-type__input" 
-                    placeholder="Water Type" 
+                    placeholder="Type includes..." 
                     displayValue={(type: string) => type}
                     onChange={(e) => setQuery(e.target.value)}
                 />
