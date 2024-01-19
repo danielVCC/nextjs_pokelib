@@ -53,7 +53,7 @@ export async function fetchPokemonStats(pokemon_id: number): Promise<number[]> {
     const response = await fetch(POKEMON_STATS_API_URL, { method: 'GET', headers: API_HEADERS });
     const pokemonDataList: PokemonStatsProps[] = JSON.parse(await response.text());
 
-    const pokemonData = pokemonDataList.find((pokemon) => pokemon.pokemon_id === pokemon_id);
+    const pokemonData = pokemonDataList.find((pokemon) => pokemon.pokemon_id === pokemon_id && pokemon.form === "Normal");
 
     if (pokemonData) {
         const { base_attack, base_defense, base_stamina } = pokemonData;
