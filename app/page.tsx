@@ -7,9 +7,9 @@ import { generations, rarity } from '@/constants';
 export default async function Home({ searchParams }) {
 
   const pokemons = await fetchPokemon({
-    type: searchParams.type || '',
+    type: searchParams.type || 'all',
     name: searchParams.name || '',
-    generation: searchParams.gen || 1,
+    generation: searchParams.gen || '',
     rarity: searchParams.rarity || 'standard',
     limit: searchParams.limit || 24
   });

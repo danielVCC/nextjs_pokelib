@@ -24,21 +24,24 @@ const API_HEADERS = {
 };
 
 function checkGeneration(gen: number, id: number): boolean {
-    const generation = Number(gen);
-    switch (generation) {
-        case 1:
-            return id >= 1 && id <= 151;
-        case 2:
-            return id >= 152 && id <= 251;
-        case 3:
-            return id >= 252 && id <= 386;
-        case 4:
-            return id >= 387 && id <= 493;
-        case 5:
-            return id >= 494 && id <= 649;
-        default:
-            return false;
+    if(gen){
+        const generation = Number(gen);
+        switch (generation) {
+            case 1:
+                return id >= 1 && id <= 151;
+            case 2:
+                return id >= 152 && id <= 251;
+            case 3:
+                return id >= 252 && id <= 386;
+            case 4:
+                return id >= 387 && id <= 493;
+            case 5:
+                return id >= 494 && id <= 649;
+            default:
+                return false;
+        }
     }
+    return true;
 }
 
 export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[]> {
@@ -47,17 +50,17 @@ export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[
         const pokemonDataList: PokemonTypeProps[] = JSON.parse(await response.text());
 
         let filteredPokemon = pokemonDataList.filter((pokemon) => {
-            return pokemon.form === 'Normal' && checkGeneration(filters.generation, pokemon.pokemon_id);
+            return pokemon.form === 'Normal' && pokemon.pokemon_id <=649 && checkGeneration(filters.generation, pokemon.pokemon_id);
         });
 
-        if (filters.type !== "") {
+        if (filters.type !== "all") {
             filteredPokemon = filteredPokemon.filter((pokemon) => {
                 return pokemon.type.map(type => type.toLowerCase()).includes(filters.type) 
             });
         }
         if (filters.name !== "") {
             filteredPokemon = filteredPokemon.filter((pokemon) => {
-                return pokemon.pokemon_name.toLowerCase() === filters.name;
+                return pokemon.pokemon_name.toLowerCase().includes(filters.name);
             });
         }
         if(filteredPokemon.length > filters.limit) {

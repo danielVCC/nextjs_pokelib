@@ -1,4 +1,5 @@
 export const pokemonTypes = [
+    "All",
     "Normal",
     "Fire",
     "Water",
