@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Hero, SearchBar, CustomFilter, PokeCard } from '@/components'
+import { Hero, SearchBar, CustomFilter, PokeCard, ShowMore } from '@/components'
 import { fetchPokemon } from '@/utils'
 import { generations, rarity } from '@/constants';
 
@@ -42,6 +42,11 @@ export default async function Home({ searchParams }) {
                 <PokeCard pokemon={pokemon} />
               ))}
             </div>
+            
+            <ShowMore
+              pageNumber={(searchParams.limit || 24) / 24} 
+              isNext={(searchParams.limit || 24) > pokemons.length}
+            />
         </section>
         ) : 
         (
