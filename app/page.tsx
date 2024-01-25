@@ -10,7 +10,7 @@ export default async function Home({ searchParams }) {
     type: searchParams.type || 'all',
     name: searchParams.name || '',
     generation: searchParams.gen || '',
-    rarity: searchParams.rarity || 'standard',
+    rarity: searchParams.rarity || '',
     limit: searchParams.limit || 24
   });
   

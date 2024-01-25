@@ -32,10 +32,8 @@ const PokeCard = ( { pokemon } : PokeCardProps) => {
         </p>
 
         <div className="poke-card__image">
-            <a href={`https://pokemondb.net/pokedex/${pokemon_name.toLowerCase()}`}>
-                <Image src={`https://img.pokemondb.net/sprites/black-white/normal/${pokemon_name.toLowerCase()}.png`}
-                    alt={pokemon_name} fill priority className="object-contain" />
-            </a>
+            <Image src={`https://img.pokemondb.net/sprites/black-white/normal/${pokemon_name.toLowerCase()}.png`}
+                alt={pokemon_name} fill priority className="object-contain" />
         </div>
 
         <div className="relative flex w-full mt-2">

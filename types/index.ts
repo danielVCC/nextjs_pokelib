@@ -55,9 +55,9 @@ export interface PokemonRarityProps extends PokemonBaseProps {
 }
 
 export interface PokemonRarityListProps {
-    legendary: PokemonRarityProps[];
-    mythic: PokemonRarityProps[];
-    standard: PokemonRarityProps[];
+    Legendary: PokemonRarityProps[];
+    Mythic: PokemonRarityProps[];
+    Standard: PokemonRarityProps[];
     ultra_beast: PokemonRarityProps[];
 }
 

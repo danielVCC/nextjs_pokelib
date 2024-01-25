@@ -63,9 +63,6 @@ export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[
                 return pokemon.pokemon_name.toLowerCase().includes(filters.name);
             });
         }
-        if(filteredPokemon.length > filters.limit) {
-            filteredPokemon = filteredPokemon.slice(0, filters.limit);
-        }
 
         const sts_response = await fetch(POKEMON_STATS_API_URL, { method: 'GET', headers: API_HEADERS });
         const pokemonStatsList: PokemonStatsProps[] = JSON.parse(await sts_response.text());
@@ -86,7 +83,17 @@ export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[
             return pokemon_with_added_attributes;
         });
 
-        const pokemon_with_stats = await Promise.all(pokemonPromises);
+        let pokemon_with_stats = await Promise.all(pokemonPromises);
+
+        if (filters.rarity !== "") {
+            pokemon_with_stats = pokemon_with_stats.filter((pokemon) => {
+                return pokemon.rarity.toLowerCase().includes(filters.rarity);
+            });
+        }
+
+        if(pokemon_with_stats.length > filters.limit) {
+            pokemon_with_stats = pokemon_with_stats.slice(0, filters.limit);
+        }
 
         return pokemon_with_stats;
 
@@ -109,30 +116,25 @@ async function fetchPokemonStats(pokemon_id: number, pokemonDataList: PokemonSta
 }
 
 async function fetchPokemonRarity(pokemon_id: number, pokemonDataList: PokemonRarityListProps): Promise<string> {
-    // const findPokemonInCategory = (category: PokemonRarityProps[]): string | null => {
-    //     const foundPokemon = category.find(pokemon => pokemon.pokemon_id === pokemon_id);
-    //     return foundPokemon ? foundPokemon.rarity : null;
-    // };
+    const findPokemonInCategory = (category: PokemonRarityProps[]): string | null => {
+        const foundPokemon = category.find(pokemon => pokemon.pokemon_id === pokemon_id);
+        return foundPokemon ? foundPokemon.rarity : null;
+    };
 
-    // const legendaryRarity = findPokemonInCategory(pokemonDataList.legendary);
-    // if (legendaryRarity) {
-    //     return legendaryRarity;
-    // }
+    const legendaryRarity = findPokemonInCategory(pokemonDataList.Legendary);
+    if (legendaryRarity) {
+        return legendaryRarity;
+    }
 
-    // const mythicRarity = findPokemonInCategory(pokemonDataList.mythic);
-    // if (mythicRarity) {
-    //     return mythicRarity;
-    // }
+    const mythicRarity = findPokemonInCategory(pokemonDataList.Mythic);
+    if (mythicRarity) {
+        return mythicRarity;
+    }
 
-    // const standardRarity = findPokemonInCategory(pokemonDataList.standard);
-    // if (standardRarity) {
-    //     return standardRarity;
-    // }
+    const standardRarity = findPokemonInCategory(pokemonDataList.Standard);
+    if (standardRarity) {
+        return standardRarity;
+    }
 
-    // const ultraBeastRarity = findPokemonInCategory(pokemonDataList.ultra_beast);
-    // if (ultraBeastRarity) {
-    //     return ultraBeastRarity;
-    // }
-    // Se o Pokémon não foi encontrado em nenhuma categoria
-    return "Standard";
+    return "";
 }

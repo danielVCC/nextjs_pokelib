@@ -49,8 +49,11 @@ const SearchBar = () => {
     if (type) {
       searchParams.set("type", type);
     } else {
-       searchParams.delete("type");
+      searchParams.delete("type");
     }
+
+    // Reset limit
+    searchParams.delete("limit")
 
     // Generate the new pathname with the updated search parameters
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
