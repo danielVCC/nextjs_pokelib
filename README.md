@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Deployed at: [Link](https://nextjs-pokelib-cblw.vercel.app/).
+
 ## Getting Started
 
 Create a .env file in the root directory:
