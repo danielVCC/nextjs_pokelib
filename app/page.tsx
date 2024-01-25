@@ -23,7 +23,6 @@ export default async function Home({ searchParams }) {
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Library</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, esse.</p>
         </div>
 
         <div className="home__filters">
