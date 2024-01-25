@@ -1,5 +1,5 @@
 import { PokemonProps, PokemonRarityListProps, PokemonRarityProps, PokemonStatsProps, PokemonTypeProps, filterProps } from "@/types";
-require('dotenv').config();
+require("dotenv").config();
 
 export const updateSearchParams = (type: string, value: string) => {
     // Get the current URL search params
@@ -14,13 +14,13 @@ export const updateSearchParams = (type: string, value: string) => {
     return newPathname;
   };
 
-const API_URL = 'https://pokemon-go1.p.rapidapi.com/pokemon_types.json';
-const POKEMON_STATS_API_URL = 'https://pokemon-go1.p.rapidapi.com/pokemon_stats.json';
-const POKEMON_RARITY_API_URL = 'https://pokemon-go1.p.rapidapi.com/pokemon_rarity.json';
+const API_URL = "https://pokemon-go1.p.rapidapi.com/pokemon_types.json";
+const POKEMON_STATS_API_URL = "https://pokemon-go1.p.rapidapi.com/pokemon_stats.json";
+const POKEMON_RARITY_API_URL = "https://pokemon-go1.p.rapidapi.com/pokemon_rarity.json";
 
 const API_HEADERS = {
-    'X-RapidAPI-Key': process.env.API_KEY,
-    'X-RapidAPI-Host': 'pokemon-go1.p.rapidapi.com',
+    "X-RapidAPI-Key": process.env.API_KEY,
+    "X-RapidAPI-Host": "pokemon-go1.p.rapidapi.com",
 };
 
 function checkGeneration(gen: number, id: number): boolean {
@@ -46,11 +46,11 @@ function checkGeneration(gen: number, id: number): boolean {
 
 export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[]> {
     try {
-        const response = await fetch(API_URL, { method: 'GET', headers: API_HEADERS });
+        const response = await fetch(API_URL, { method: "GET", headers: API_HEADERS });
         const pokemonDataList: PokemonTypeProps[] = JSON.parse(await response.text());
 
         let filteredPokemon = pokemonDataList.filter((pokemon) => {
-            return pokemon.form === 'Normal' && pokemon.pokemon_id <=649 && checkGeneration(filters.generation, pokemon.pokemon_id);
+            return pokemon.form === "Normal" && pokemon.pokemon_id <=649 && checkGeneration(filters.generation, pokemon.pokemon_id);
         });
 
         if (filters.type !== "all") {
@@ -64,10 +64,10 @@ export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[
             });
         }
 
-        const sts_response = await fetch(POKEMON_STATS_API_URL, { method: 'GET', headers: API_HEADERS });
+        const sts_response = await fetch(POKEMON_STATS_API_URL, { method: "GET", headers: API_HEADERS });
         const pokemonStatsList: PokemonStatsProps[] = JSON.parse(await sts_response.text());
 
-        const rarity_response = await fetch(POKEMON_RARITY_API_URL, { method: 'GET', headers: API_HEADERS });
+        const rarity_response = await fetch(POKEMON_RARITY_API_URL, { method: "GET", headers: API_HEADERS });
         const pokemonRarityList: PokemonRarityListProps = JSON.parse(await rarity_response.text());
 
         const pokemonPromises = filteredPokemon.map(async (pokemon) => {
@@ -98,7 +98,7 @@ export async function fetchPokemon(filters : filterProps): Promise<PokemonProps[
         return pokemon_with_stats;
 
     } catch (error) {
-        console.error('Error fetching Pokémon data:', error);
+        console.error("Error fetching Pokémon data:", error);
         throw error;
     }
 }

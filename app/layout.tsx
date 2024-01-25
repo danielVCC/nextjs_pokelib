@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Footer, NavBar } from '@/components'
+import type { Metadata } from 'next';
+import './globals.css';
+import { Footer, NavBar } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'PokeLib',
-  description: 'The best Pokemon Database',
+  title: "PokeLib",
+  description: "The best Pokemon Go Database",
 }
 
 export default function RootLayout({

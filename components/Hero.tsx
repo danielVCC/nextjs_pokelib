@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="hero">
             <div className="flex-1 pt-36 padding-x">
                 <h1 className="hero__title">
-                    Explore the Ultimate Pokémon Library
+                    Explore the Ultimate Pokémon Go Library
                 </h1>
 
                 <p className="hero__subtitle">
